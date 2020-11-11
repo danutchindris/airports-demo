@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ro.siit.domain.Flight;
 import ro.siit.repository.FlightRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -28,6 +29,16 @@ public class FlightController {
                         + "\n" + f.getArrivalAirport().getName() + " " + f.getArrivalAirport().getCity())
                 .orElse("no data");
         mav.addObject("flight", flight);
+        return mav;
+    }
+
+    @GetMapping("/flights/city/{city}/date/{date}")
+    public ModelAndView displayFilteredFlights(@PathVariable("city") final String city,
+                                       @PathVariable("date") final String date) {
+        final ModelAndView mav = new ModelAndView("filtered-flights");
+        final List<Flight> flights = flightRepository
+                .findFlightsByCustomRules(LocalDateTime.parse(date), city);
+        mav.addObject("flights", flights);
         return mav;
     }
 }

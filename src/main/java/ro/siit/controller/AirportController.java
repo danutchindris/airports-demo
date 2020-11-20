@@ -1,6 +1,7 @@
 package ro.siit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,9 @@ public class AirportController {
     @Autowired
     private AirportRepository airportRepository;
 
+    // autentificare != autorizare
+
+    @PreAuthorize("hasRole('administrator')")
     @GetMapping("/airports") // mapping-ul de e tip GET (metoda HTTP) pentru ca accesam
     // calea /airports in browser cu scopul de a obtine date si a le afisa in pagina
     public String retrieveAirports(final Model model) {

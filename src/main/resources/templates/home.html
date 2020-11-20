@@ -14,12 +14,11 @@
     <div class="container">
 
         <a th:href="@{/search}">Search</a>
-        <a th:href="@{/airports}">Airports</a>
+        <a th:href="@{/airports}" sec:authorize="hasRole('administrator')">Airports</a>
 
         <a th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
         <a th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a>
 
-        <!--<a th:attr="href=@{/admin/dashboard}" sec:authorize="hasRole('administrator')">Admin Dashboard</a>-->
     </div>
 </body>
 </html>

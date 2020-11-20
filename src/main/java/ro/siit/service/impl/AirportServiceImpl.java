@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.siit.domain.Airport;
 import ro.siit.model.Search;
+import ro.siit.payload.AirportPayload;
 import ro.siit.repository.AirportRepository;
 import ro.siit.service.AirportService;
 
@@ -28,5 +29,22 @@ public class AirportServiceImpl implements AirportService {
             list = airportRepository.findAll();
         }
         return list;
+    }
+
+    @Override
+    public Airport createAirport(final String name) {
+        final Airport airport = new Airport();
+        airport.setName(name);
+        final Airport savedAirport = airportRepository.save(airport); // metoda save are efecte secundare - modifica obiectul transmis ca parametru
+        return savedAirport;
+    }
+
+    @Override
+    public Airport updateAirport(final AirportPayload payload) {
+        final Airport airport = new Airport();
+        airport.setId(payload.getId());
+        airport.setName(payload.getName());
+        final Airport updatedAirport = airportRepository.save(airport);
+        return updatedAirport;
     }
 }

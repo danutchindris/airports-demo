@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- for responsive carousel and toggle nav menu-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Fonts and icons -->
+    <script src="https://kit.fontawesome.com/04daf65bfb.js" crossorigin="anonymous"></script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <!-- Show password -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js">
+    </script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="general-form">
+    <form th:action="@{/login}" method="POST">
+        <h2>Log In</h2>
+        <div class="form-group" th:if="${param.error}">
+            Invalid username and/or password.
+        </div>
+        <div class="form-group" th:if="${param.logout}">
+            You have been logged out successfully.
+        </div>
+        <div class="form-group" th:if="${message}">
+            <span th:text="${message}">Display this message.</span>
+        </div>
+
+        <div class="form-group">
+            <label for="username"> Username</label>
+            <input class="form-control" placeholder="E-mail address" id="username" name="username" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="password"> Password </label>
+            <input class="form-control" placeholder="Password" id="password" name="password" type="password" data-toggle="password"/>
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-block btn-lg btnform" type="submit">Log In</button>
+        </div>
+    </form>
+    <div class="text-center">
+        <a th:href="@{/reset-password}" href="reset-password.html">Forgot password?</a>
+    </div>
+    <div class="text-center">
+        Don't have an account? <a th:href="@{/register}" href="register-style.html">Sign up here</a>
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
